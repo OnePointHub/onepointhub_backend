@@ -1,66 +1,122 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# [OnePointHub](https://onepointhub.co) Backend
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+OnePointHub is an all-in-one business management platform designed to streamline and simplify your operations. From HR and payroll to accounting, invoicing, CRM, and project management, OnePointHub provides a comprehensive suite of integrated tools that empower businesses to manage everything from one central hub. With a user-friendly interface and flexible features, OnePointHub helps businesses of all sizes increase efficiency, enhance collaboration, and gain complete control over their daily operations — all in one place.
 
-## About Laravel
+## This is the backend for OnePointHub
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### Technologies:
+* Laravel 11
+* MySQL
+* Laravel Breeze
+* Laravel Sanctum
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Modules
+1. HR & Employee Management - Planning
+2. Accounting & Finance - Planning
+3. CRM (Customer Relationship Management) - Planning
+4. Project & Task Management - Planning
+5. E-Commerce - Planning
+6. Helpdesk & Customer Support - In Progress
+   * Ticketing System
+   * Knowledge Base
+   * Live Chat Integration
+   * Support Analytics
+7. Website Builder - Planning
+8. Marketing Automation - Planning
+9. Document Management - Planning
+10. Collaboration & Communication - Planning
+11. Inventory & Supply Chain Management - Planning
+12. Client Portal - Planning
+13. Compliance & Legal - Planning
+14. Data Analytics & Reporting - Planning
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+#### Helpdesk & Customer Support
+1. Ticket Management System
+   * Ticket Creation:
+     * Allow customers to create tickets via email, web forms, or chat. Provide options for customers to attach files or provide detailed descriptions.
+   * Ticket Tracking:
+     * Enable tracking of ticket status (e.g. Open, In Progress, Resolved, Closed) and display ticket history for each customer.
+   * Categorizations:
+     * Automatically or manually categorize tickets (e.g. Billings, Technical Issue, General Inquiry) to streamline routing and resolution.
+   * Prioritization:
+     * Set priorities (e.g. Low, Medium, High) to manage urgent issues effectively.
+2. Knowledge Base
+   * Articles and FAQs:
+     * Provide a repository of articles, FAQs, and guides to help customers find solutions to common problems independently.
+   * Search Functionality:
+     * Implement a robust search feature to help users quickly find relevant information.
+   * Categories and Tags:
+     * Organize articles into categories and tags for easy navigation.
+3. Multi-Channel Support
+   * Email Integration:
+     * Manage customer queries and tickets through email integration.
+   * Live Chat:
+     * Offer real-time support via chat. Include features like chat transcripts and proactive chat invitations.
+   * Phone Support:
+     * Provide options for customers to request callbacks or connect with support agents directly via phone.
+   * Social Media Integration:
+     * Monitor and respond to customer queries on social media platforms. 
+4. Automated Responses and Workflows
+   * Auto-Responses:
+     * Send automated replies to acknowledge receipt of tickets and provide initial information.
+   * Workflow Automation:
+     * Automate common tasks such as ticket routing, escalations, and status updates based on predefined rules. 
+5. Agent Management
+   * Agent Profiles:
+     * Create profiles for support agents with information such as skills, roles, and contact details.
+   * Role-Based Access:
+     * Define permissions and access levels based on agent roles (e.g., Support Agent, Supervisor).
+   * Performance Metrics:
+     * Track and analyze agent performance metrics such as ticket resolution times and customer satisfaction scores. 
+6. CRM Integration
+   * Customer Profiles:
+     * Link tickets and interactions to customer profiles for a complete view of their history and preferences.
+   * Interaction History:
+     * Maintain a log of all customer interactions and support tickets.
+7. Reporting and Analytics
+   * Ticket Analytics:
+     * Generate reports on ticket volume, resolution times, and response times.
+   * Customer Feedback:
+     * Collect and analyze customer feedback on support interactions to identify areas for improvement.
+   * Agent Performance:
+     * Track individual agent performance metrics to ensure high-quality support. 
+8. Self-Service Options
+   * Customer Portal:
+     * Provide a self-service portal where customers can view their tickets, check status, and update information.
+   * Community Forums:
+     * Enable customers to participate in forums or discussion boards where they can ask questions and share solutions. 
+9. Customization and Branding
+   * Customizable Templates:
+     * Allow customization of email templates, ticket forms, and chat widgets to match the company’s branding.
+   * Branding:
+     * Ensure the support interface aligns with the overall branding and design of the application. 
+10. Security and Compliance
+    * Data Security:
+      * Implement security measures to protect sensitive customer data and comply with data protection regulations.
+    * Access Control:
+      * Manage access to sensitive information and features based on user roles and permissions. 
+11. Integration with Other Modules
+    * CRM Integration:
+      * Sync support data with the CRM module for a unified view of customer interactions.
+    * Analytics Integration:
+      * Combine support data with business analytics to track overall performance and customer satisfaction. 
+12. Training & Support for Agents
+    * Training Materials:
+      * Provide resources and training materials to help agents effectively use the helpdesk system and handle various types of inquiries.
+    * Support Resources:
+      * Offer internal support for agents, such as help documentation and escalation procedures. 
 
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+#### Roles & Permissions
+1. Admin
+   * Administrator that has access to everything 
+2. Agent
+   * Can respond to ticket
+   * Can change Category
+   * Can change Priority
+   * Can mark Ticket Closed/Resolved
+   * Can access Agent's Material
+   * Can write KB Articles
+3. Customer
+   * Can create/update/see tickets.
+   * Can see the history of his/hers tickets.
+   * Can read KB Articles
