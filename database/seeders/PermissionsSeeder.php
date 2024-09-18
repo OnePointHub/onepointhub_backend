@@ -18,6 +18,10 @@ class PermissionsSeeder extends Seeder
         // Create Permissions
         Permission::create(['name' => 'view users']);
 
+
+
+
+
         // Create Roles and Assign Permissions
         $role1 = Role::create(['name' => 'customer']);
         $role2 = Role::create(['name' => 'agent']);
