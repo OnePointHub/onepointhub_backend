@@ -24,8 +24,6 @@ Route::prefix('v1')->group(function () {
                         Route::post('/', 'store')->name('store');
                         Route::put('/{kbArticle}', 'update')->name('update');
                         Route::delete('/{kbArticle}', 'destroy')->name('destroy');
-                        Route::put('/{kbArticle}/attach/{kbCategory}', 'attach')->name('attach');
-                        Route::put('/{kbArticle}/detach/{kbCategory}', 'detach')->name('detach');
                         Route::put('/{kbArticle}/publish/{publishDate?}', 'publish')->name('publish');
                         Route::put('/{kbArticle}/unpublish', 'unpublish')->name('unpublish');
                     });

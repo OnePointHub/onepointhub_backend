@@ -4,7 +4,7 @@ namespace App\Models\Helpdesk;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
@@ -13,10 +13,18 @@ class KbArticle extends Model
     use HasFactory, HasSlug;
 
     protected $fillable = [
+        'category_id',
         'title',
         'body',
         'published_at',
     ];
+
+    /**
+     * The relationships that should always be loaded.
+     *
+     * @var array
+     */
+    protected $with = ['category'];
 
     /**
      * Get the options for generating the slug.
@@ -39,11 +47,11 @@ class KbArticle extends Model
     }
 
     /**
-     * The categories that belong to this article.
+     * The category that this article Belongs To.
      */
-    public function kb_categories(): BelongsToMany
+    public function category(): BelongsTo
     {
-        return $this->belongsToMany(KbCategory::class, 'kb_article_kb_category');
+        return $this->belongsTo(KbCategory::class);
     }
 
 }

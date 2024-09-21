@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Helpdesk;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Helpdesk\KbCategoryRequest;
 use App\Http\Resources\Helpdesk\KbCategoryResource;
-use App\Models\Helpdesk\KbArticle;
 use App\Models\Helpdesk\KbCategory;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
@@ -22,9 +21,6 @@ class KbCategoryController extends Controller implements HasMiddleware
             new Middleware('permission:create categories', only: ['store']),
             new Middleware('permission:edit categories', only: ['update']),
             new Middleware('permission:delete categories', only: ['destroy']),
-            new Middleware('permission:attach article to categories', only: ['attach']),
-            new Middleware('permission:detach article from categories', only: ['detach']),
-
         ];
     }
 
@@ -55,19 +51,5 @@ class KbCategoryController extends Controller implements HasMiddleware
         $kbCategory->delete();
 
         return response()->json();
-    }
-
-    public function attach(KbCategory $kbCategory, KbArticle $kbArticle)
-    {
-        $kbCategory->kb_articles()->attach($kbArticle);
-
-        return new KbCategoryResource($kbCategory);
-    }
-
-    public function detach(KbCategory $kbCategory, KbArticle $kbArticle)
-    {
-        $kbCategory->kb_articles()->detach($kbArticle);
-
-        return new KbCategoryResource($kbCategory);
     }
 }

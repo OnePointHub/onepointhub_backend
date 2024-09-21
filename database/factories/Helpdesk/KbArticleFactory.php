@@ -15,9 +15,9 @@ class KbArticleFactory extends Factory
         return [
             'title' => $this->faker->word(),
             'body' => $this->faker->paragraph(),
-//            'published_at' => $this->faker->dateTime(),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
+            'category_id' => $this->faker->numberBetween(1, 10),
         ];
     }
 }

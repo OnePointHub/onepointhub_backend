@@ -17,18 +17,14 @@ class HelpdeskModulePermissionsSeeder extends Seeder
         Permission::create(['name' => 'edit articles']);
         Permission::create(['name' => 'create articles']);
         Permission::create(['name' => 'delete articles']);
-        Permission::create(['name' => 'attach category to articles']);
-        Permission::create(['name' => 'detach category from articles']);
         Permission::create(['name' => 'publish articles']);
         Permission::create(['name' => 'unpublish articles']);
 
         // Categories Permissions
-        Permission::create(['name' => 'read categories']);
+        PErmission::create(['name' => 'read categories']);
         Permission::create(['name' => 'edit categories']);
         Permission::create(['name' => 'create categories']);
         Permission::create(['name' => 'delete categories']);
-        Permission::create(['name' => 'attach article to categories']);
-        Permission::create(['name' => 'detach article from categories']);
 
         // FAQs Permissions
         Permission::create(['name' => 'read faqs']);
@@ -43,34 +39,30 @@ class HelpdeskModulePermissionsSeeder extends Seeder
         // Customer
         Role::create(['name' => 'customer'])
             ->givePermissionTo('read faqs')
-            ->givePermissionTo('read categories')
             ->givePermissionTo('read articles');
 
         // Agent
         Role::create(['name' => 'agent'])
-            ->givePermissionTo('read faqs')
             ->givePermissionTo('read categories')
+            ->givePermissionTo('read faqs')
             ->givePermissionTo('read articles')
             ->givePermissionTo('create faqs')
             ->givePermissionTo('create articles')
             ->givePermissionTo('edit faqs')
-            ->givePermissionTo('edit articles')
-            ->givePermissionTo('attach category to articles')
-            ->givePermissionTo('detach category from articles');
+            ->givePermissionTo('edit articles');
 
         // Helpdesk Admin
         Role::create(['name' => 'helpdesk admin'])
             ->givePermissionTo('read faqs')
-            ->givePermissionTo('read categories')
             ->givePermissionTo('read articles')
             ->givePermissionTo('create faqs')
             ->givePermissionTo('create articles')
             ->givePermissionTo('edit faqs')
             ->givePermissionTo('edit articles')
-            ->givePermissionTo('attach category to articles')
-            ->givePermissionTo('detach category from articles')
             ->givePermissionTo('publish faqs')
             ->givePermissionTo('unpublish faqs')
+            ->givePermissionTo('delete faqs')
+            ->givePermissionTo('read categories')
             ->givePermissionTo('create categories')
             ->givePermissionTo('edit categories')
             ->givePermissionTo('publish articles')

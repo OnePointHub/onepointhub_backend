@@ -19,7 +19,7 @@ class KbArticleResource extends JsonResource
             'published_at' => $this->published_at,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-            'categories' => $this->kb_categories,
+            'category' => $this->category,
         ];
     }
 }

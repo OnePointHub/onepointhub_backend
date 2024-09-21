@@ -18,7 +18,10 @@ class KbArticleRequest extends FormRequest
             'body' => [
                 'required',
                 'string',
-            ]
+            ],
+            'category_id' => [
+                'required',
+            ],
         ];
     }
 

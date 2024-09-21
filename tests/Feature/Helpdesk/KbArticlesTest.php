@@ -15,12 +15,15 @@ beforeEach(function () {
         $this->user,
         ['*']
     );
+    $this->category = KbCategory::factory()->create(['name' => 'Category 1']);
 });
 
 it('can show all articles', function () {
     $this->user->givePermissionTo('read articles');
 
-    KbArticle::factory(10)->create();
+    KbArticle::factory(10)->create([
+        'category_id' => $this->category->id,
+    ]);
 
     $response = $this->getJson(route('kbarticles.index'));
 
@@ -37,6 +40,7 @@ it('can show single article', function () {
     $article = KbArticle::factory()->create([
         'title' => 'Article title',
         'body' => 'Article body',
+        'category_id' => $this->category->id,
     ]);
 
     $response = $this->getJson(route('kbarticles.show', $article->slug));
@@ -45,7 +49,8 @@ it('can show single article', function () {
 
     $response
         ->assertJsonPath('data.title', $article->title)
-        ->assertJsonPath('data.body', $article->body);
+        ->assertJsonPath('data.body', $article->body)
+        ->assertJsonPath('data.category.name', $this->category->name);
 });
 
 it('can create article', function () {
@@ -54,6 +59,7 @@ it('can create article', function () {
     $article = [
         'title' => 'Article title',
         'body' => 'Article body',
+        'category_id' => $this->category->id,
     ];
 
     $response = $this->postJson(route('kbarticles.store'), $article);
@@ -62,7 +68,9 @@ it('can create article', function () {
 
     $response
         ->assertJsonPath('data.title', $article['title'])
-        ->assertJsonPath('data.body', $article['body']);
+        ->assertJsonPath('data.body', $article['body'])
+        ->assertJsonPath('data.category.name', $this->category->name);
+
 
     $this->assertDatabaseCount('kb_articles', 1);
 
@@ -72,11 +80,14 @@ it('can create article', function () {
 it('can edit article', function () {
     $this->user->givePermissionTo('edit articles');
 
-    $article = KbArticle::factory()->create();
+    $article = KbArticle::factory()->create(['category_id' => $this->category->id]);
+
+    $newCategory = KbCategory::factory()->create(['name' => 'Category 2']);
 
     $newArticle = [
         'title' => 'Article title',
         'body' => $article->body,
+        'category_id' => $newCategory->id,
     ];
 
     $response = $this->putJson(route('kbarticles.update', $article->slug), $newArticle);
@@ -85,18 +96,20 @@ it('can edit article', function () {
 
     $response
         ->assertJsonPath('data.title', $newArticle['title'])
-        ->assertJsonPath('data.body', $article->body);
+        ->assertJsonPath('data.body', $article->body)
+        ->assertJsonPath('data.category.id', $newArticle['category_id']);
 
     $this->assertDatabaseHas('kb_articles', [
         'title' => $newArticle['title'],
         'body' => $article->body,
+        'category_id' => $newCategory->id,
     ]);
 });
 
 it('can delete article', function () {
     $this->user->givePermissionTo('delete articles');
 
-    $article = KbArticle::factory()->create();
+    $article = KbArticle::factory()->create(['category_id' => $this->category->id]);
 
     $response = $this->deleteJson(route('kbarticles.destroy', $article->slug));
 
@@ -105,55 +118,13 @@ it('can delete article', function () {
     $this->assertDatabaseMissing('kb_articles', $article->toArray());
 });
 
-it('can attach a category to article', function () {
-    $this->user->givePermissionTo('attach category to articles');
-
-    $category = KbCategory::factory()->create();
-
-    $article = KbArticle::factory()->create();
-
-    $response = $this->putJson(route('kbarticles.attach', [$article->slug, $category->slug]));
-
-    $response->assertOk();
-
-    $response
-        ->assertJsonPath('data.id', $article->id)
-        ->assertJsonPath('data.title', $article->title)
-        ->assertJson(fn (AssertableJson $json) =>
-            $json->has('data.categories', 1)
-                ->has('data.categories.0', fn (AssertableJson $json) =>
-                    $json->where('id', $category->id)
-                        ->etc())
-            );
-});
-
-it('can detach a category from article', function () {
-    $this->user->givePermissionTo('detach category from articles');
-
-    $category = KbCategory::factory()->create();
-
-    $article = KbArticle::factory()->create();
-
-    $article->kb_categories()->detach($category);
-
-    $response = $this->putJson(route('kbarticles.detach', [$article->slug, $category->slug]));
-
-    $response->assertOk();
-
-    $response
-        ->assertJsonPath('data.id', $article->id)
-        ->assertJsonPath('data.title', $article->title)
-        ->assertJson(fn (AssertableJson $json) =>
-        $json->has('data.categories', 0)
-        );
-});
-
 it('can publish an article without specifying a date', function () {
     $this->user->givePermissionTo('publish articles');
 
     $article = KbArticle::factory()->create([
         'title' => 'Article title',
         'body' => 'Article body',
+        'category_id' => $this->category->id,
     ]);
 
     $response = $this->putJson(route('kbarticles.publish', $article->slug));
@@ -172,6 +143,7 @@ it('can publish an article specifying a date', function () {
     $article = KbArticle::factory()->create([
         'title' => 'Article title',
         'body' => 'Article body',
+        'category_id' => $this->category->id,
 
     ]);
 
@@ -193,6 +165,7 @@ it('can unpublish an article', function () {
     $article = KbArticle::factory()->create([
         'title' => 'Article title',
         'body' => 'Article body',
+        'category_id' => $this->category->id,
         'published_at' => '2024-01-01 12:00:05',
     ]);
 

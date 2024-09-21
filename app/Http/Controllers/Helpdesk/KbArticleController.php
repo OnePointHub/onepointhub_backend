@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Helpdesk\KbArticleRequest;
 use App\Http\Resources\Helpdesk\KbArticleResource;
 use App\Models\Helpdesk\KbArticle;
-use App\Models\Helpdesk\KbCategory;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Carbon;
@@ -23,8 +22,6 @@ class KbArticleController extends Controller implements HasMiddleware
             new Middleware('permission:create articles', only: ['store']),
             new Middleware('permission:edit articles', only: ['update']),
             new Middleware('permission:delete articles', only: ['destroy']),
-            new Middleware('permission:attach category to articles', only: ['attach']),
-            new Middleware('permission:detach category from articles', only: ['detach']),
             new Middleware('permission:publish articles', only: ['publish']),
             new Middleware('permission:unpublish articles', only: ['unpublish']),
         ];
@@ -48,6 +45,7 @@ class KbArticleController extends Controller implements HasMiddleware
     public function update(KbArticleRequest $request, KbArticle $kbArticle)
     {
         $kbArticle->update($request->validated());
+        $kbArticle->refresh();
 
         return new KbArticleResource($kbArticle);
     }
@@ -57,20 +55,6 @@ class KbArticleController extends Controller implements HasMiddleware
         $kbArticle->delete();
 
         return response()->json();
-    }
-
-    public function attach(KbArticle $kbArticle, KbCategory $kbCategory)
-    {
-        $kbArticle->kb_categories()->attach($kbCategory);
-
-        return new KbArticleResource($kbArticle);
-    }
-
-    public function detach(KbArticle $kbArticle, KbCategory $kbCategory)
-    {
-        $kbArticle->kb_categories()->detach($kbCategory);
-
-        return new KbArticleResource($kbArticle);
     }
 
     public function publish(KbArticle $kbArticle, $publishDate = null)

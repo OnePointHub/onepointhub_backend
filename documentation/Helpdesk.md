@@ -88,8 +88,6 @@
     * Delete KB Article
     * Get all KB Articles
     * Get single KB Article
-    * Attach Category to KB Article
-    * Detach Category from KB Article
     * Publish KB Article
     * Unpublish KB Article
 * Categories:
@@ -98,8 +96,6 @@
     * Delete Category
     * Get all Categories
     * Get single Category
-    * Attach KB Article to Category
-    * Detach KB Article from Category
 * FAQs:
     * Create FAQ
     * Update FAQ
@@ -124,8 +120,6 @@
 | POST   | /kb/                              | Create a new KB Article           | https://example.com/api/v1/helpdesk/kb                                   |
 | PUT    | /kb/{slug}                        | Update KB Article                 | https://example.com/api/v1/helpdesk/kb/article-1                         |
 | DELETE | /kb/{slug}                        | Delete KB Article                 | https://example.com/api/v1/helpdesk/kb/article-1                         |
-| PUT    | /kb/{slug}/attach/{categorySlug}  | Attach a category to KB Article   | https://example.com/api/v1/helpdesk/kb/article-1/attach/category-1       |
-| PUT    | /kb/{slug}/detach/{categorySlug}  | Detach a category from KB Article | https://example.com/api/v1/helpdesk/kb/article-1/detach/category-1       |
 | PUT    | /kb/{slug}/publish/{publishDate?} | Publish a KB Article              | https://example.com/api/v1/helpdesk/kb/article-1/publish/{optional-Date} |
 | PUT    | /kb/{slug}/unpublish              | Unpublish a KB Article            | https://example.com/api/v1/helpdesk/kb/article-1/unpublish               |
 
@@ -138,8 +132,6 @@
 | POST   | /categories/                            | Create a new Category             | https://example.com/api/v1/helpdesk/categories                             |
 | PUT    | /categories/{slug}                      | Update Category                   | https://example.com/api/v1/helpdesk/categories/category-1                  |
 | DELETE | /categories/{slug}                      | Delete Category                   | https://example.com/api/v1/helpdesk/categories/category-1                  |
-| PUT    | /categories/{slug}/attach/{articleSlug} | Attach a category to KB Article   | https://example.com/api/v1/helpdesk/categories/category-1/attach/article-1 |
-| PUT    | /categories/{slug}/detach/{articleSlug} | Detach a category from KB Article | https://example.com/api/v1/helpdesk/categories/category-1/detach/article-1 |
 
 ### FAQs
 
@@ -162,6 +154,7 @@
 | Field        | Type            | Null | Key | Default | Extra          |
 |--------------|-----------------|------|-----|---------|----------------|
 | id           | bigint unsigned | NO   | PRI | NULL    | auto_increment |
+| category_id  | bigint unsigned | NO   | MUL | NULL    |                |
 | title        | varchar(255)    | NO   |     | NULL    |                |
 | slug         | varchar(255)    | NO   |     | NULL    |                |
 | body         | text            | NO   |     | NULL    |                |
@@ -179,16 +172,6 @@
 | slug       | varchar(255)    | NO   |     | NULL    |                |
 | created_at | timestamp       | YES  |     | NULL    |                |
 | updated_at | timestamp       | YES  |     | NULL    |                |
-
-## Pivot Table KB Articles - Categories:
-### Table Name: kb_article_kb_category
-
-| Field          | Type            | Null | Key | Default | Extra |
-|----------------|-----------------|------|-----|---------|-------|
-| kb_article_id  | bigint unsigned | NO   | PRI | NULL    |       |
-| kb_category_id | bigint unsigned | NO   | PRI | NULL    |       |
-| created_at     | timestamp       | YES  |     | NULL    |       |
-| updated_at     | timestamp       | YES  |     | NULL    |       |
 
 ## FAQs:
 ### Table Name: faqs
@@ -217,15 +200,11 @@
     * Can Edit Category
     * Can Create Category
     * Can Delete Category
-    * Can Attach KB Article to Category
-    * Can Detach KB Article to Category
 * KB Articles
     * Can Read KB Article
     * Can Edit KB Article
     * Can Create KB Article
     * Can Delete KB Article
-    * Can Attach Category to KB Article
-    * Can Detach Category from KB Article
     * Can Publish KB Article
     * Can Unpublish KB Article
 
@@ -240,8 +219,6 @@
     * Can Edit FAQ
     * Can Create KB Article
     * Can Edit KB Article
-    * Can Attach KB Article to Category
-    * Can Detach KB Article from Category
 * Helpdesk Admin:
     * All Customer Permissions
     * All Agent Permissions
@@ -251,4 +228,4 @@
     * Can Edit Category
     * Can Publish KB Article
     * Can Unpublish KB Article
-    * Can assign Roles to Users
+    * Can Assign Roles to Users

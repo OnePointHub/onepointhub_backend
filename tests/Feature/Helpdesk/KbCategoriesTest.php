@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\Helpdesk\KbArticle;
 use App\Models\Helpdesk\KbCategory;
 use App\Models\User;
 use Database\Seeders\HelpdeskModulePermissionsSeeder;
@@ -97,47 +96,3 @@ it('can delete category', function () {
 
     $this->assertDatabaseMissing('kb_categories', $category->toArray());
 });
-
-it('can attach an article to category', function () {
-    $this->user->givePermissionTo('attach article to categories');
-
-    $category = KbCategory::factory()->create();
-
-    $article = KbArticle::factory()->create();
-
-    $response = $this->putJson(route('kbcategories.attach', [$category->slug, $article->slug]));
-
-    $response->assertOk();
-
-    $response
-        ->assertJsonPath('data.id', $category->id)
-        ->assertJsonPath('data.name', $category->name)
-        ->assertJson(fn (AssertableJson $json) =>
-        $json->has('data.articles', 1)
-            ->has('data.articles.0', fn (AssertableJson $json) =>
-            $json->where('id', $article->id)
-                ->etc())
-        );
-});
-
-it('can detach an article from category', function () {
-    $this->user->givePermissionTo('detach article from categories');
-
-    $category = KbCategory::factory()->create();
-
-    $article = KbArticle::factory()->create();
-
-    $category->kb_articles()->detach($category);
-
-    $response = $this->putJson(route('kbcategories.detach', [$category->slug, $article->slug]));
-
-    $response->assertOk();
-
-    $response
-        ->assertJsonPath('data.id', $category->id)
-        ->assertJsonPath('data.name', $category->name)
-        ->assertJson(fn (AssertableJson $json) =>
-        $json->has('data.articles', 0)
-        );
-});
-
