@@ -26,7 +26,7 @@ class KbCategoryController extends Controller implements HasMiddleware
 
     public function index()
     {
-        return KbCategoryResource::collection(KbCategory::all());
+        return KbCategoryResource::collection(KbCategory::withCount('articles')->get());
     }
 
     public function store(KbCategoryRequest $request)

@@ -4,6 +4,7 @@ namespace App\Models\Helpdesk;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
@@ -33,5 +34,13 @@ class KbCategory extends Model
     public function getRouteKeyName(): string
     {
         return 'slug';
+    }
+
+    /**
+     * The articles that belong to this Category.
+     */
+    public function articles(): HasMany
+    {
+        return $this->hasMany(KbArticle::class, 'category_id');
     }
 }

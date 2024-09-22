@@ -39,6 +39,7 @@ it('can show single category', function () {
     $response = $this->getJson(route('kbcategories.show', $category->slug));
 
     $response->assertOk();
+//    dd($response);
 
     $response
         ->assertJsonPath('data.name', $category->name);
