@@ -39,8 +39,6 @@ Route::prefix('v1')->group(function () {
                         Route::post('/', 'store')->name('store');
                         Route::put('/{kbCategory}', 'update')->name('update');
                         Route::delete('/{kbCategory}', 'destroy')->name('destroy');
-                        Route::put('/{kbCategory}/attach/{kbArticle}', 'attach')->name('attach');
-                        Route::put('/{kbCategory}/detach/{kbArticle}', 'detach')->name('detach');
                     });
                 });
             });
