@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Helpdesk;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class KbCategoryRequest extends FormRequest
 {
@@ -11,6 +12,7 @@ class KbCategoryRequest extends FormRequest
         return [
             'name' => [
                 'required',
+                'unique:kb_categories,name',
                 'string',
                 'min:3',
                 'max:255',
