@@ -46,3 +46,4 @@ OnePointHub is an all-in-one business management platform designed to streamline
 # TODO
 * Allow updating categories with same name
 
+# Test new workflow
