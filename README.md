@@ -43,6 +43,6 @@ OnePointHub is an all-in-one business management platform designed to streamline
    * Can read KB Articles
 
 
-
-
+# TODO
+* Allow updating categories with same name
 

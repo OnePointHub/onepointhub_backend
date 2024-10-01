@@ -2,6 +2,7 @@
 
 namespace App\Models\Helpdesk;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -24,7 +25,7 @@ class KbArticle extends Model
      *
      * @var array
      */
-    protected $with = ['category'];
+    protected $with = ['category', 'author'];
 
     /**
      * Get the options for generating the slug.
@@ -52,6 +53,14 @@ class KbArticle extends Model
     public function category(): BelongsTo
     {
         return $this->belongsTo(KbCategory::class);
+    }
+
+    /**
+     * The author of this article.
+     */
+    public function author(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'author_id');
     }
 
 }

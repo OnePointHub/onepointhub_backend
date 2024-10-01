@@ -11,6 +11,7 @@ return new class extends Migration {
         Schema::create('kb_articles', function (Blueprint $table) {
             $table->id();
             $table->foreignId('category_id')->constrained((new KbCategory())->getTable());
+            $table->foreignId('author_id')->constrained('users');
             $table->string('title');
             $table->string('slug');
             $table->text('body');

@@ -35,6 +35,13 @@ class User extends Authenticatable
     ];
 
     /**
+     * The relationships that should always be loaded.
+     *
+     * @var array
+     */
+    protected $with = ['roles'];
+
+    /**
      * Get the attributes that should be cast.
      *
      * @return array<string, string>
