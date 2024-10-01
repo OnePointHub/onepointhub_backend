@@ -15,7 +15,7 @@ return new class extends Migration {
             $table->string('title');
             $table->string('slug');
             $table->text('body');
-            $table->dateTime('published_at')->nullable();
+            $table->boolean('published_at')->default(false);
             $table->timestamps();
         });
     }

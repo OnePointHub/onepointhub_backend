@@ -50,7 +50,7 @@ it('can show single article', function () {
     $response
         ->assertJsonPath('data.title', $article->title)
         ->assertJsonPath('data.body', $article->body)
-        ->assertJsonPath('data.category.name', $this->category->name);
+        ->assertJsonPath('data.category', $this->category->name);
 });
 
 it('can create article', function () {
@@ -70,7 +70,7 @@ it('can create article', function () {
     $response
         ->assertJsonPath('data.title', $article['title'])
         ->assertJsonPath('data.body', $article['body'])
-        ->assertJsonPath('data.category.name', $this->category->name);
+        ->assertJsonPath('data.category', $this->category->name);
 
 
     $this->assertDatabaseCount('kb_articles', 1);
@@ -99,7 +99,7 @@ it('can edit article', function () {
     $response
         ->assertJsonPath('data.title', $newArticle['title'])
         ->assertJsonPath('data.body', $article->body)
-        ->assertJsonPath('data.category.id', $newArticle['category_id']);
+        ->assertJsonPath('data.category', $newCategory['name']);
 
     $this->assertDatabaseHas('kb_articles', [
         'title' => $newArticle['title'],

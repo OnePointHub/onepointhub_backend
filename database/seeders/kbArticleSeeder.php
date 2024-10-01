@@ -12,7 +12,7 @@ class kbArticleSeeder extends Seeder
     {
         kbArticle::factory(30)->create();
         kbArticle::factory(20)->create([
-            'published_at' => Carbon::now()->toDateTimeString(),
+            'published_at' => true,
         ]);
     }
 }
