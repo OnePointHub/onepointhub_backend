@@ -14,6 +14,7 @@ class KbArticle extends Model
     use HasFactory, HasSlug;
 
     protected $fillable = [
+        'author_id',
         'category_id',
         'title',
         'body',

@@ -57,6 +57,7 @@ it('can create article', function () {
     $this->user->givePermissionTo('create articles');
 
     $article = [
+        'author_id' => $this->user->id,
         'title' => 'Article title',
         'body' => 'Article body',
         'category_id' => $this->category->id,
@@ -85,6 +86,7 @@ it('can edit article', function () {
     $newCategory = KbCategory::factory()->create(['name' => 'Category 2']);
 
     $newArticle = [
+        'author_id' => $this->user->id,
         'title' => 'Article title',
         'body' => $article->body,
         'category_id' => $newCategory->id,

@@ -9,6 +9,9 @@ class KbArticleRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'author_id' => [
+                'required',
+            ],
             'title' => [
                 'required',
                 'string',
